@@ -1,0 +1,19 @@
+[project.urls]
+GitHub = "https://github.com/BrokenSource/DearLog"
+
+[project]
+name        = "dearlog"
+description = "🪵 A Human Logging Library"
+authors     = [{name="Tremeschin"}]
+version     = "0.1.0"
+readme      = "readme.md"
+license     = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "attrs",
+    "rich",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
