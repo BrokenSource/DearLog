@@ -2,6 +2,7 @@
 > Absolutely work in progress!!
 
 <div align="center">
+  <img src="https://raw.githubusercontent.com/BrokenSource/DearLog/main/website/assets/images/logo.png" width="210">
   <h1>DearLog</h1>
   <span>🪵 A Human Logging Library 🪵</span>
   <br>
