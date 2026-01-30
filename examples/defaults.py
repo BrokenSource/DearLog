@@ -1,7 +1,10 @@
+from dearlog import logger
+
+logger.info("I am this fast to import!")
+logger.info("without rich, that is..")
+
 import random
 import time
-
-from dearlog import logger
 
 while True:
     method = random.choice((
@@ -19,5 +22,5 @@ while True:
     ))
 
     method("Hello, DearLog!")
-    time.sleep(random.uniform(0.1, 0.3))
+    time.sleep(random.uniform(0.0, 0.3))
 

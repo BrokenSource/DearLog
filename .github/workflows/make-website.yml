@@ -19,6 +19,9 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
 
+      - name: Symlink workaround
+        run: ln readme.md website/index.md
+
       - name: Build website
         run: uvx zensical build
 

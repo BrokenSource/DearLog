@@ -1,0 +1,72 @@
+[project]
+site_name = "DearLog"
+site_description = "🪵 A Human Logging Library"
+site_author = "Tremeschin"
+site_url  = "https://dearlog.brokensrc.dev/"
+repo_url  = "https://github.com/BrokenSource/DearLog/"
+repo_name = "BrokenSource/DearLog"
+copyright = "&copy; CC BY-SA 4.0, <a href='https://github.com/Tremeschin/'>Tremeschin</a> 🇧🇷"
+docs_dir  = "website"
+nav = [
+  {"Home" = [
+    "index.md",
+    "about/changelog.md",
+  ]},
+  {"Documentation" = [
+    "docs/index.md",
+    "docs/levels.md",
+    "docs/handlers.md",
+  ]},
+]
+
+extra_css = ["assets/main.css"]
+
+[project.theme]
+variant = "modern"
+favicon = "assets/images/logo.png"
+language = "en"
+features = [
+  # Code block features
+  "content.code.copy",
+
+  # Footnote preview
+  "content.footnote.tooltips",
+  "content.tooltips",
+
+  # Switch all tabs with the same name at once
+  "content.tabs.link",
+
+  # Others
+  "navigation.indexes",
+  "navigation.expand",
+  # "navigation.sections",
+  "navigation.footer",
+  "navigation.path",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.instant.progress",
+  "navigation.tabs",
+  "navigation.top",
+  "search.highlight",
+  "toc.follow",
+]
+
+[project.theme.icon]
+logo = "octicons/log-16"
+repo = "fontawesome/brands/github"
+
+[[project.theme.palette]]
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+media       = "(prefers-color-scheme: light)"
+scheme      = "default"
+primary     = "blue"
+accent      = "light-blue"
+
+[[project.theme.palette]]
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+media       = "(prefers-color-scheme: dark)"
+scheme      = "slate"
+primary     = "orange"
+accent      = "orange"

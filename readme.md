@@ -1,6 +1,3 @@
-> [!WARNING]
-> Absolutely work in progress!!
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/BrokenSource/DearLog/main/website/assets/images/logo.png" width="210">
   <h1>DearLog</h1>
@@ -23,15 +20,17 @@ A simple, pretty and human-first logging library for Python.
 - **Sane defaults**: Sensible logging formats and levels out of the box
 
 - **User-first** experience and quality of life features:
-  - Logging multiple lines.. enqueues multiple logs!
-  - All methods return the message for inlining
+    - Logging multiple lines.. enqueues multiple logs!
+    - All methods return the message for inlining
 
 - **Levels**: Standard logging levels, plus quality of life ones:
-  - `Level.OK`: For expected or successful operations
-  - `Level.MINOR`: Disabled or ignored issues, features
-  - `Level.SKIP`: For skipped operations, tests
-  - `Level.FIXME`: May need manual workarounds
-  - `Level.TODO`: For planned work or improvements
-  - `Level.TIP`: Helpful hints or suggestions
+    - `Level.OK`: For expected or successful operations
+    - `Level.MINOR`: Disabled or ignored issues, features
+    - `Level.SKIP`: For skipped operations, tests
+    - `Level.FIXME`: May need manual workarounds
+    - `Level.TODO`: For planned work or improvements
+    - `Level.TIP`: Helpful hints or suggestions
 
 - **Simple** handlers, formatters, configurations and filters
+
+- **Fast** import times, lazy loading where possible
