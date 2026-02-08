@@ -4,9 +4,12 @@ import time
 REFTIME: float = time.monotonic()
 """Instant the program started, means nothing alone"""
 
-__version__: str = "0.1.0"
-__author__:  str = "Tremeschin"
-__about__:   str = "🪵 A Human Logging Library"
+from importlib.metadata import metadata
+
+__meta__:   dict = metadata(__package__)
+__about__:   str = __meta__["Summary"]
+__author__:  str = __meta__["Author"]
+__version__: str = __meta__["Version"]
 
 import builtins
 import os
@@ -106,6 +109,7 @@ class LogEntry:
 # ---------------------------------------------------------------------------- #
 
 class LogFormat:
+
     def simple(e: LogEntry) -> Iterable[str]:
         """Just the message contents"""
         yield from e.message
@@ -171,16 +175,16 @@ class _CommonIoHandler(LogHandler):
 
 @define
 class StdoutHandler(_CommonIoHandler):
-    _stream: object = sys.stdout
+    _sink: object = sys.stdout
 
 @define
 class StderrHandler(_CommonIoHandler):
-    _stream: object = sys.stderr
+    _sink: object = sys.stderr
 
 @define
 class FileHandler(_CommonIoHandler):
-    path: Path = Path(os.getenv("LOGFILE", "dearlog.txt"))
-    mode: str = os.getenv("LOGFILE_MODE", "a")
+    path: Path = None
+    mode: str = "a"
 
     def __attrs_post_init__(self) -> None:
         self._sink = open(self.path, self.mode)
