@@ -22,34 +22,43 @@ from attrs import Factory, define
 
 @define
 class LogLevel:
+
     name: str
     """Name and identifier"""
 
     @property
     def uname(self) -> str:
+        """Uppercase level name"""
         return self.name.upper()
 
+    enabled: bool = True
+    """Whether this level should be logged"""
+
     color: str = ""
+    """Base color for this level"""
+
+    emoji: str = ""
+    """Optional emoji for this level"""
 
     extra: dict = Factory(dict)
-    enabled: bool = True
+    """Custom formatting metadata"""
 
 # ---------------------------------------------------------------------------- #
 
 class Levels:
-    TRACE = LogLevel(name="trace", color="dark_turquoise", enabled=False)
-    DEBUG = LogLevel(name="debug", color="turquoise4", enabled=False)
-    INFO  = LogLevel(name="info",  color="bright_white")
-    NOTE  = LogLevel(name="note",  color="bright_blue")
-    OK    = LogLevel(name="ok",    color="green")
-    MINOR = LogLevel(name="minor", color="grey42")
-    SKIP  = LogLevel(name="skip",  color="grey42")
-    TODO  = LogLevel(name="todo",  color="dark_blue")
-    TIP   = LogLevel(name="tip",   color="dark_cyan")
-    FIXME = LogLevel(name="fixme", color="cyan")
-    WARN  = LogLevel(name="warn",  color="yellow")
-    ERROR = LogLevel(name="error", color="red")
-    CRIT  = LogLevel(name="crit",  color="red")
+    TRACE = LogLevel(name="trace", emoji="🔷", color="dark_turquoise", enabled=False)
+    DEBUG = LogLevel(name="debug", emoji="🔵", color="turquoise4", enabled=False)
+    INFO  = LogLevel(name="info",  emoji="⚪️", color="bright_white")
+    NOTE  = LogLevel(name="note",  emoji="🔎", color="bright_blue")
+    OK    = LogLevel(name="ok",    emoji="✅", color="green")
+    MINOR = LogLevel(name="minor", emoji="🔘", color="grey42")
+    SKIP  = LogLevel(name="skip",  emoji="♻️", color="grey42")
+    TODO  = LogLevel(name="todo",  emoji="✏️", color="dark_blue")
+    TIP   = LogLevel(name="tip",   emoji="💡", color="dark_cyan")
+    FIXME = LogLevel(name="fixme", emoji="🚧", color="cyan")
+    WARN  = LogLevel(name="warn",  emoji="⚠️", color="yellow")
+    ERROR = LogLevel(name="error", emoji="❌", color="red")
+    CRIT  = LogLevel(name="crit",  emoji="💥", color="red")
 
 # ---------------------------------------------------------------------------- #
 
@@ -103,7 +112,7 @@ class LogFormat:
 
     def stopwatch(e: LogEntry) -> Iterable[str]:
         yield f"│{e.minsec}├"
-        yield f"┤[{e.level.color} bold]{e.level.name:5}[/]│"
+        yield f"┤[{e.level.color} bold]{e.level.emoji} {e.level.name:5}[/]│"
         yield " "
         yield from e.message
 
@@ -184,7 +193,7 @@ class DearLogger:
     handlers: list[LogHandler] = Factory(list)
     """Collection of handlers to process records"""
 
-    def setlevel(self, config: str) -> None:
+    def setlevels(self, config: str) -> None:
         """
         Parse a configuration string for loglevels (case-insensitive).
 
@@ -242,4 +251,4 @@ logger: DearLogger = DearLogger()
 
 # Add default handlers
 logger.handlers.append(StdoutHandler())
-logger.setlevel(os.getenv("LOGLEVEL", ""))
+logger.setlevels(os.getenv("DEARLEVEL", ""))
