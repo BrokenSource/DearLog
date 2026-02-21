@@ -1,6 +1,3 @@
-[project.urls]
-GitHub = "https://github.com/BrokenSource/DearLog"
-
 [project]
 name        = "dearlog"
 description = "🪵 A Human Logging Library"

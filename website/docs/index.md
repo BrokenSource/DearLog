@@ -26,5 +26,9 @@ logger.ok("✔ Quickstart complete!")
 Oh, and [`rich`](https://pypi.org/project/rich/) formatting is enabled by default
 
 ```python
-logger.minor("[bold red]Consider [link=https://github.com/sponsors/Tremeschin/]Supporting[/link][/] me on GitHub!")
+logger.minor((
+    "[bold red]Consider "
+    "[link=https://github.com/sponsors/Tremeschin/]Supporting[/link][/] "
+    "me on GitHub!"
+))
 ```

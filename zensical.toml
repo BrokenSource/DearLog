@@ -26,25 +26,17 @@ variant = "modern"
 favicon = "assets/images/logo.png"
 language = "en"
 features = [
-  # Code block features
   "content.code.copy",
-
-  # Footnote preview
   "content.footnote.tooltips",
-  "content.tooltips",
-
-  # Switch all tabs with the same name at once
   "content.tabs.link",
-
-  # Others
-  "navigation.indexes",
+  "content.tooltips",
   "navigation.expand",
-  # "navigation.sections",
   "navigation.footer",
-  "navigation.path",
-  "navigation.instant",
+  "navigation.indexes",
   "navigation.instant.prefetch",
   "navigation.instant.progress",
+  "navigation.instant",
+  "navigation.path",
   "navigation.tabs",
   "navigation.top",
   "search.highlight",
@@ -70,3 +62,11 @@ media       = "(prefers-color-scheme: dark)"
 scheme      = "slate"
 primary     = "orange"
 accent      = "orange"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/Tremeschin"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/discord"
+link = "https://discord.gg/KjqvcYwRHm"

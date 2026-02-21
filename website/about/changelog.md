@@ -5,9 +5,20 @@ icon: material/file-document-edit
 
 <style>ul li {line-height: 1.1}</style>
 
-<!-- ### 📦 v0.1.0 <small>Month ??, 2026</small> {#v0.1.0} -->
-
 ### ✏️ Staging {#staging}
 
+### 📦 v0.1.0 <small>February 21, 2026</small> {#v0.1.0}
+
+First release 🚀
+
 !!! success ""
-    Initial implementation, basic functionality
+    **Additions**
+
+    - Basic functionality working
+    - Stdout and file handlers
+    - Many logging levels
+
+    **Limitations**
+
+    - Missing level filtering from environment
+    - Missing compat/integration with stdlib

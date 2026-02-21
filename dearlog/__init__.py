@@ -115,7 +115,7 @@ class LogFormat:
         yield from e.message
 
     def stopwatch(e: LogEntry) -> Iterable[str]:
-        yield f"│{e.minsec}├"
+        yield f"│[green]{e.minsec}[/]├"
         yield f"┤[{e.level.color} bold]{e.level.name:5}[/]│"
         yield " "
         yield from e.message
