@@ -7,9 +7,9 @@ REFTIME: float = time.monotonic()
 from importlib.metadata import metadata
 
 __meta__:   dict = metadata(__package__)
-__about__:   str = __meta__["Summary"]
-__author__:  str = __meta__["Author"]
-__version__: str = __meta__["Version"]
+__about__:   str = __meta__.get("Summary")
+__author__:  str = __meta__.get("Author")
+__version__: str = __meta__.get("Version")
 
 import builtins
 import os
@@ -116,7 +116,7 @@ class LogFormat:
 
     def stopwatch(e: LogEntry) -> Iterable[str]:
         yield f"│{e.minsec}├"
-        yield f"┤[{e.level.color} bold]{e.level.emoji} {e.level.name:5}[/]│"
+        yield f"┤[{e.level.color} bold]{e.level.name:5}[/]│"
         yield " "
         yield from e.message
 
