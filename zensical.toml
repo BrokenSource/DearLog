@@ -2,7 +2,7 @@
 site_name = "DearLog"
 site_description = "🪵 A Human Logging Library"
 site_author = "Tremeschin"
-site_url  = "https://dearlog.brokensrc.dev/"
+site_url  = "https://dearlog.tremeschin.com/"
 repo_url  = "https://github.com/BrokenSource/DearLog/"
 repo_name = "BrokenSource/DearLog"
 copyright = "&copy; CC BY-SA 4.0, <a href='https://github.com/Tremeschin/'>Tremeschin</a> 🇧🇷"

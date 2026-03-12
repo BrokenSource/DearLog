@@ -13,8 +13,8 @@
   <b>
     Links •
     <a href="https://github.com/BrokenSource/DearLog">GitHub</a> •
-    <a href="https://dearlog.brokensrc.dev/">Documentation</a> •
-    <a href="https://dearlog.brokensrc.dev/about/changelog">Changelog</a>
+    <a href="https://dearlog.tremeschin.com/">Documentation</a> •
+    <a href="https://dearlog.tremeschin.com/about/changelog">Changelog</a>
   </b>
   <br>
   <sub><small>⭐️ Consider starring the project to help it grow! ⭐️</small></sub>
