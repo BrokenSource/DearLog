@@ -6,19 +6,20 @@ REFTIME: float = time.monotonic()
 
 from importlib.metadata import metadata
 
-__meta__:   dict = metadata(__package__)
-__about__:   str = __meta__.get("Summary")
-__author__:  str = __meta__.get("Author")
-__version__: str = __meta__.get("Version")
+__meta__    = metadata(str(__package__))
+__about__   = __meta__["Summary"]
+__author__  = __meta__["Author"]
+__version__ = __meta__["Version"]
 
 import builtins
+import datetime
 import os
 import sys
 from abc import ABC, abstractmethod
-from datetime import datetime
+from collections.abc import Callable
 from functools import partialmethod
 from pathlib import Path
-from typing import Iterable
+from typing import IO, Iterable, Optional
 
 from attrs import Factory, define
 
@@ -87,11 +88,11 @@ class LogEntry:
     def __str__(self) -> str:
         return ''.join(self.message)
 
-    date: datetime = Factory(datetime.now)
+    date: datetime.datetime = Factory(datetime.datetime.now)
     """Absolute time the event happened (Local Timezone)"""
 
     @property
-    def utc(self) -> datetime:
+    def utc(self) -> datetime.datetime:
         """Absolute time the event happened (UTC Timezone)"""
         return self.date.astimezone(datetime.timezone.utc)
 
@@ -120,9 +121,6 @@ class LogFormat:
         yield " "
         yield from e.message
 
-    def default(e: LogEntry) -> Iterable[str]:
-        ...
-
     @staticmethod
     def unrich(text: str) -> str:
         """Strip rich markup from a string"""
@@ -134,17 +132,17 @@ class LogFormat:
 @define
 class LogHandler(ABC):
 
-    format: callable = LogFormat.stopwatch
+    format: Callable = LogFormat.stopwatch
     """Format callable for log messages"""
 
     enabled: bool = True
     """Whether this handler is enabled"""
 
-    def _format(self, entry: LogEntry) -> str:
-        return ''.join(self.format(entry))
+    def _format(self, event: LogEntry) -> str:
+        return ''.join(self.format(event))
 
     @abstractmethod
-    def handle(self, entry: LogEntry) -> None:
+    def handle(self, event: LogEntry) -> None:
         ...
 
 # ---------------------------------------------------------------------------- #
@@ -156,7 +154,7 @@ class _CommonIoHandler(LogHandler):
     """Whether to use rich formatting or plain text"""
 
     # Children must set this
-    _sink: object = None
+    _sink: Optional[IO[str]] = None
     """Sink target, children must set this"""
 
     def handle(self, event: LogEntry) -> None:
