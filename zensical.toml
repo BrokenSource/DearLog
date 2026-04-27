@@ -20,49 +20,12 @@ nav = [
   ]},
 ]
 
-extra_css = ["assets/main.css"]
-
 [project.theme]
-variant = "modern"
+name = "zentheme"
 favicon = "assets/images/logo.png"
-language = "en"
-features = [
-  "content.code.copy",
-  "content.footnote.tooltips",
-  "content.tabs.link",
-  "content.tooltips",
-  "navigation.expand",
-  "navigation.footer",
-  "navigation.indexes",
-  "navigation.instant.prefetch",
-  "navigation.instant.progress",
-  "navigation.instant",
-  "navigation.path",
-  "navigation.tabs",
-  "navigation.top",
-  "search.highlight",
-  "toc.follow",
-]
 
 [project.theme.icon]
 logo = "octicons/log-16"
-repo = "fontawesome/brands/github"
-
-[[project.theme.palette]]
-toggle.icon = "lucide/sun"
-toggle.name = "Switch to dark mode"
-media       = "(prefers-color-scheme: light)"
-scheme      = "default"
-primary     = "blue"
-accent      = "light-blue"
-
-[[project.theme.palette]]
-toggle.icon = "lucide/moon"
-toggle.name = "Switch to light mode"
-media       = "(prefers-color-scheme: dark)"
-scheme      = "slate"
-primary     = "orange"
-accent      = "orange"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
