@@ -1,6 +1,5 @@
 import time
 
-# Warn: dearlog must be your first import
 REFTIME: float = time.monotonic()
 """Instant the program started, means nothing alone"""
 
