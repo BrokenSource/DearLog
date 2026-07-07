@@ -7,7 +7,6 @@ from importlib.metadata import metadata
 
 __meta__    = metadata(str(__package__))
 __about__   = __meta__["Summary"]
-__author__  = __meta__["Author"]
 __version__ = __meta__["Version"]
 
 import builtins

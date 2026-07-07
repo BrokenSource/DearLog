@@ -1,15 +1,17 @@
 [project]
 name        = "dearlog"
 description = "🪵 A Human Logging Library"
-authors     = [{name="Tremeschin"}]
 version     = "0.1.0"
-readme      = "readme.md"
 license     = "MIT"
+readme      = "readme.md"
 requires-python = ">=3.10"
 dependencies = [
     "attrs",
     "rich",
 ]
+
+[project.urls]
+GitHub = "https://github.com/BrokenSource/DearLog"
 
 [build-system]
 requires = ["hatchling"]
