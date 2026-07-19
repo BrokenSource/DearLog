@@ -3,11 +3,10 @@ import time
 REFTIME: float = time.monotonic()
 """Instant the program started, means nothing alone"""
 
-from importlib.metadata import metadata
-
-__meta__    = metadata(str(__package__))
-__about__   = __meta__["Summary"]
-__version__ = __meta__["Version"]
+__about__   = "🪵 A Human Logging Library"
+__package__ = "dearlog"
+__version__ = "0.1.1"
+__license__ = "MIT"
 
 import builtins
 import datetime
