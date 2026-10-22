@@ -13,12 +13,12 @@ import datetime
 import os
 import sys
 from abc import ABC, abstractmethod
-from collections.abc import Callable
+from collections.abc import Callable, Iterable, Sequence
 from functools import partialmethod
 from pathlib import Path
-from typing import IO, Iterable, Optional
+from typing import IO, Any, cast, final, override
 
-from attrs import Factory, define
+from attrs import Factory, define, field
 
 
 @define
@@ -41,11 +41,12 @@ class LogLevel:
     emoji: str = ""
     """Optional emoji for this level"""
 
-    extra: dict = Factory(dict)
+    extra: dict[str, Any] = Factory(dict)
     """Custom formatting metadata"""
 
 # ---------------------------------------------------------------------------- #
 
+@final
 class Levels:
     TRACE = LogLevel(name="trace", emoji="🔷", color="dark_turquoise", enabled=False)
     DEBUG = LogLevel(name="debug", emoji="🔵", color="turquoise4", enabled=False)
@@ -70,10 +71,10 @@ class LogEntry:
     level: LogLevel
     """Verbosity level of the event"""
 
-    args: tuple = Factory(tuple)
+    args: Sequence[Any] = Factory(tuple)
     """Direct arguments sent"""
 
-    kwargs: dict = Factory(dict)
+    kwargs: dict[str, Any] = Factory(dict)
     """Keyword arguments sent"""
 
     @property
@@ -82,6 +83,7 @@ class LogEntry:
         if self.kwargs:
             yield str(self.kwargs)
 
+    @override
     def __str__(self) -> str:
         return ''.join(self.message)
 
@@ -91,7 +93,7 @@ class LogEntry:
     @property
     def utc(self) -> datetime.datetime:
         """Absolute time the event happened (UTC Timezone)"""
-        return self.date.astimezone(datetime.timezone.utc)
+        return self.date.astimezone(datetime.UTC)
 
     uptime: float = Factory(lambda: time.monotonic() - REFTIME)
     """Relative time the event happened since program start"""
@@ -108,10 +110,12 @@ class LogEntry:
 
 class LogFormat:
 
+    @staticmethod
     def simple(e: LogEntry) -> Iterable[str]:
         """Just the message contents"""
         yield from e.message
 
+    @staticmethod
     def stopwatch(e: LogEntry) -> Iterable[str]:
         yield f"│[green]{e.minsec}[/]├"
         yield f"┤[{e.level.color} bold]{e.level.name:5}[/]│"
@@ -129,7 +133,7 @@ class LogFormat:
 @define
 class LogHandler(ABC):
 
-    format: Callable = LogFormat.stopwatch
+    format: Callable[[LogEntry], Iterable[str]] = LogFormat.stopwatch
     """Format callable for log messages"""
 
     enabled: bool = True
@@ -151,9 +155,10 @@ class _CommonIoHandler(LogHandler):
     """Whether to use rich formatting or plain text"""
 
     # Children must set this
-    _sink: Optional[IO[str]] = None
+    _sink: IO[str] | None = None
     """Sink target, children must set this"""
 
+    @override
     def handle(self, event: LogEntry) -> None:
         if self.rich:
             try:
@@ -170,15 +175,15 @@ class _CommonIoHandler(LogHandler):
 
 @define
 class StdoutHandler(_CommonIoHandler):
-    _sink: object = sys.stdout
+    _sink: Any = sys.stdout
 
 @define
 class StderrHandler(_CommonIoHandler):
-    _sink: object = sys.stderr
+    _sink: Any = sys.stderr
 
 @define
 class FileHandler(_CommonIoHandler):
-    path: Path = None
+    path: Path = field(default=None)
     mode: str = "a"
 
     def __attrs_post_init__(self) -> None:
@@ -201,13 +206,13 @@ class DearLogger:
         - `+all`: Enable all levels
         - `-all,+warn`: Only enable the warn level
         """
-        for token in config.split(","):
+        for _token in config.split(","):
             ...
 
     def log(self,
         *args: str,
         __level__: LogLevel,
-        **kwargs: dict,
+        **kwargs: dict[str, Any],
     ) -> LogEntry:
         """The main, and only one, logging method."""
 
